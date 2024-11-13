@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "scraper.apps.ScraperConfig",
+    "analysis.apps.AnalysisConfig",
+    "notifications.apps.NotificationsConfig"
 ]
 
 MIDDLEWARE = [
