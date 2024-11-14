@@ -18,7 +18,7 @@
 
 ## Modelo de Lenguaje Adaptado (LLM)
 
-Este proyecto utiliza un modelo LLM basado en [Modelo Base, e.g., GPT-Neo] finetuneado específicamente para el sistema legal colombiano utilizando NVIDIA Workbench. Esto permite análisis automatizados de documentos legales, como resúmenes y extracción de puntos clave.
+Este proyecto utiliza un modelo LLM basado en [Modelo Base, e.g., GPT-Neo] finetuneado específicamente para el sistema legal colombiano. Esto permite análisis automatizados de documentos legales, como resúmenes y extracción de puntos clave.
 
 ## Instalación
 
