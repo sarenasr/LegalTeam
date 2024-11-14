@@ -1,0 +1,173 @@
+/* static/css/style.css */
+
+/* Base styles */
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    margin: 0;
+}
+
+/* Navbar styles */
+.navbar {
+    background-color: #1e2a38;
+    padding: 0.2rem 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 1rem;
+}
+
+.menu-icon {
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 0.2rem;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    margin-left: 0.5rem;
+}
+
+.logo {
+    height: 50px;
+    width: auto;
+    margin-right: 0.5rem;
+}
+
+.brand-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Header styles */
+header {
+    background-color: #1e2a38;
+    color: #fff;
+    padding: 0.5rem;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+/* Container styles */
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Home page styles */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.feature-card {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.feature-card.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.feature-card h2 {
+    color: #004080;
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    margin-bottom: 1.5rem;
+}
+
+/* Results page styles */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background-color: #e9eef5;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border-left: 5px solid #004080;
+}
+
+li:hover {
+    background-color: #dbe5f0;
+}
+
+strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+p.error {
+    color: #cc0000;
+    font-weight: bold;
+}
+
+/* Button styles */
+.button, button {
+    background-color: #004080;
+    color: #fff;
+    text-decoration: none;
+    padding: 0.7rem 1.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.button:hover, button:hover {
+    background-color: #003366;
+}
+
+.disabled .button {
+    background-color: #cccccc;
+    pointer-events: none;
+}
+
+/* Form styles */
+form p {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
