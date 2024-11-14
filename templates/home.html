@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}LegalTeam - Inicio{% endblock %}
+
+{% block header %}Bienvenido a LegalTeam{% endblock %}
+
+{% block content %}
+<div class="features">
+    <div class="feature-card">
+        <h2>Consulta de Procesos</h2>
+        <p>Consulta y monitorea actualizaciones de procesos judiciales en tiempo real.</p>
+        <a href="{% url 'case_search' %}" class="button">Consultar Proceso</a>
+    </div>
+    
+    <div class="feature-card disabled">
+        <h2>Análisis de Documentos</h2>
+        <p>Analiza documentos legales utilizando inteligencia artificial (Próximamente).</p>
+        <span class="button">Próximamente</span>
+    </div>
+    
+    <div class="feature-card disabled">
+        <h2>Notificaciones</h2>
+        <p>Recibe alertas sobre actualizaciones en tus casos (Próximamente).</p>
+        <span class="button">Próximamente</span>
+    </div>
+</div>
+{% endblock %}
