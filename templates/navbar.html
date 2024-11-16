@@ -1,10 +1,30 @@
 {% load static %}
 <nav class="navbar">
-    <div class="nav-content">
-        <div class="menu-icon">☰</div>
+    <div class="nav-content container">
+        <!-- Logo Section -->
         <a href="{% url 'home' %}" class="logo-link">
             <img src="{% static 'images/logo.jpeg' %}" alt="LegalTeam Logo" class="logo">
             <span class="brand-name">LegalTeam</span>
         </a>
+        
+        <!-- Desktop Navigation Links -->
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}#team" class="nav-item">Nosotros</a></li>
+            <li><a href="{% url 'home' %}#como" class="nav-item">Cómo Usar</a></li>
+            <li><a href="{% url 'analysis' %}" class="nav-item">Analizar Documento</a></li>
+            <li><a href="{% url 'case_search' %}" class="nav-item">Buscar Casos</a></li>
+        </ul>
+        
+        <!-- Mobile Menu Icon -->
+        <div class="menu-icon" onclick="toggleMobileNav()">☰</div>
     </div>
+
+    
 </nav>
+
+<script>
+    function toggleMobileNav() {
+        const mobileNav = document.getElementById('mobileNav');
+        mobileNav.classList.toggle('hidden');
+    }
+</script>

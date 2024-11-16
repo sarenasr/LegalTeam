@@ -2,26 +2,85 @@
 
 {% block title %}LegalTeam - Inicio{% endblock %}
 
-{% block header %}Bienvenido a LegalTeam{% endblock %}
+
+
+{% block header %}<br/>
+
+<div class="text-center my-8 d-flex p-2" style="width: 60rem; margin:0 auto;">
+    <h1 class="text-4xl font-bold" style="color: black; font-size: 75px; font-weight: lighter;">LegalTeam</h1>
+    <p class="text-lg max-w-2xl mx-auto mt-4" style="color: grey ;font-size: 20px; font-weight: lighter;">
+        En LegalTeam ofrecemos una plataforma integral para la gestión y monitoreo de procesos judiciales. Utilizando tecnología avanzada, ayudamos a abogados y usuarios a mantenerse al tanto de sus casos, analizar documentos legales con inteligencia artificial y recibir notificaciones en tiempo real. Simplifica tu trabajo legal con nuestras herramientas efectivas y fáciles de usar.
+    </p>
+    <br/>
+<br/>
+<br/>
+</div>
+{% endblock %}
 
 {% block content %}
 <div class="features">
-    <div class="feature-card">
-        <h2>Consulta de Procesos</h2>
-        <p>Consulta y monitorea actualizaciones de procesos judiciales en tiempo real.</p>
-        <a href="{% url 'case_search' %}" class="button">Consultar Proceso</a>
+    <div class="feature-card" style="width: 16rem; margin: auto; height: 18rem;">
+        <h2 style="color: #6d9cca">Consulta de Procesos</h2><br/>
+        <p style="color: black">Consulta y monitorea actualizaciones de procesos judiciales en tiempo real.</p>
+        <br/>
+        <br/>
+        <a href="{% url 'case_search' %}" class="button" style="color: white">Consultar Proceso</a>
     </div>
     
-    <div class="feature-card">
-        <h2>Análisis de Documentos</h2>
-        <p>Analiza documentos legales utilizando inteligencia artificial.</p>
-        <a href="{% url 'analysis' %}" class="button">Consultar Proceso</a>
+    <div class="feature-card" style="width: 16rem; margin: auto; height: 18rem;">
+        <h2 style="color: #6d9cca">Análisis de Documentos</h2><br/>
+        <p style="color: black">Analiza documentos legales utilizando inteligencia artificial.</p>
+        <br/>
+        <br/>
+        <a href="{% url 'analysis' %}" class="button" style="color: white">Analizar Documento</a>
     </div>
     
-    <div class="feature-card disabled">
-        <h2>Notificaciones</h2>
-        <p>Recibe alertas sobre actualizaciones en tus casos (Próximamente).</p>
-        <span class="button">Próximamente</span>
+    <div class="feature-card disabled" style="width: 16rem; margin: auto; height: 18rem;">
+        <h2 style="color: #6d9cca">Notificaciones</h2><br/>
+        <p style="color: black">Recibe alertas sobre actualizaciones en tus casos (Próximamente).</p>
+        <br/>
+        <br/>
+        <span class="button" style="color: white">Próximamente</span>
     </div>
 </div>
+
+<!-- Team Section -->
+<section class="team-section mt-16 py-8 px-8 lg:py-12">
+    <div class="team-section">
+        <h2>Nuestro Equipo</h2>
+        <p>Somos un equipo de profesionales apasionados por la tecnología y el derecho, comprometidos en simplificar la gestión legal a través de soluciones innovadoras. En LegalTeam trabajamos para brindar herramientas tecnológicas eficientes que ayuden a abogados y usuarios a monitorear sus procesos judiciales, analizar documentos legales, y recibir notificaciones en tiempo real, haciendo que el acceso a la justicia sea más sencillo y accesible para todos.</p>
+        <div class="team-cards-container">
+            <div class="team-card">
+                <img src="https://i.imgur.com/fA6WArH.jpeg" alt="Ashlee Yin">
+                <h3>Ashlee Yin</h3>
+                <p>ash@haid.com</p>
+            </div>
+    
+            <div class="team-card">
+                <img src="https://i.imgur.com/ZOa7iFo.jpeg" alt="Pau Suso">
+                <h3>Pau Suso</h3>
+                <p>pau@haid.com</p>
+            </div>
+    
+            <div class="team-card">
+                <img src="https://i.imgur.com/qI6q8nw.jpeg" alt="David Almanza">
+                <h3>David Almanza</h3>
+                <p>david@haid.com</p>
+            </div>
+    
+            <div class="team-card">
+                <img src="https://i.imgur.com/Q4ie8qf.png" alt="Daniel Rincon">
+                <h3>Daniel Rincon</h3>
+                <p>daniel@haid.com</p>
+            </div>
+    
+            <div class="team-card">
+                <img src="https://i.imgur.com/tQGNvxy.jpeg" alt="Juan David Echeverry">
+                <h3>Juan David Echeverry</h3>
+                <p>juan@haid.com</p>
+            </div>
+        </div>
+    </div>
+</section>
+
 {% endblock %}
