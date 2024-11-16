@@ -299,3 +299,36 @@ body {
 .qa-button:hover {
     background-color: #007bbf;
 }
+
+/* Estilo para los resultados */
+.result-container {
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.actuacion-card {
+    background-color: #f0f4f8;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.actuacion-card p {
+    color: #304674;
+    margin-top: 0.5rem;
+}
+
+/* Estilo para el contenedor de búsqueda */
+.search-container {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #f0f4f8;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
