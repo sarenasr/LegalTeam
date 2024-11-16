@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis de Documentos</title>
+</head>
+<body>
+    <h1>Subir Documento Legal (PDF, DOCX, TXT)</h1>
+    <form id="uploadForm" enctype="multipart/form-data">
+        <input type="file" id="document" name="document" accept=".pdf,.docx,.txt">
+        <button type="button" onclick="uploadDocument()">Subir y Analizar</button>
+    </form>
+    <h2>Resumen</h2>
+    <div id="summary"></div>
+
+    <h2>Preguntar sobre el Documento</h2>
+    <input type="text" id="userQuestion" placeholder="Escriba su pregunta aquí">
+    <button type="button" onclick="askQuestion()">Hacer Pregunta</button>
+    <h2>Respuesta</h2>
+    <div id="answer"></div>
+
+    <script>
+        let extractedDocumentText = '';  // Store the extracted document text
+
+        function uploadDocument() {
+            const formData = new FormData();
+            const fileInput = document.getElementById('document').files[0];
+
+            if (!fileInput) {
+                alert("Por favor seleccione un documento para subir.");
+                return;
+            }
+
+            formData.append('document', fileInput);
+
+            fetch('/DocAnalysis/analyze/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error HTTP! Estado: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    document.getElementById('summary').innerText = data.summary;
+                    extractedDocumentText = data.summary;  // Store the extracted text for Q&A
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ocurrió un error al procesar el documento. Por favor intente de nuevo.');
+            });
+        }
+
+        function askQuestion() {
+            const question = document.getElementById('userQuestion').value;
+        
+            if (!question) {
+                alert("Por favor escriba una pregunta.");
+                return;
+            }
+        
+            const requestData = {
+                document_text: extractedDocumentText,
+                question: question
+            };
+        
+            // Log the data being sent to confirm the payload
+            console.log("Data being sent for Q&A:", requestData);
+        
+            fetch('/DocAnalysis/ask/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestData)
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error HTTP! Estado: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    document.getElementById('answer').innerText = data.answer;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ocurrió un error al obtener la respuesta. Por favor intente de nuevo.');
+            });
+        }        
+    </script>
+</body>
+</html>

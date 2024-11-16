@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "scraper.apps.ScraperConfig",
     "notifications.apps.NotificationsConfig",
-    "analysis.apps.AnalysisConfig"
+    "analysis.apps.AnalysisConfig",
+    'DocAnalysis.apps.DocanalysisConfig'
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,6 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# REMEMBER NEVER PUSH THE KEY
+# OPENAI_API_KEY = 'your_openai_api_key_here'
