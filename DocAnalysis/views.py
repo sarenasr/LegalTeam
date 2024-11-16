@@ -33,8 +33,8 @@ def analyze_document(request):
                 document_text = docx2txt.process(temporary_file_path)
             elif uploaded_file.content_type == 'application/pdf':
                 # PDF file using PyPDF2
-                reader = PdfReader(temporary_file_path)
                 document_text = ""
+                reader = PdfReader(temporary_file_path)
                 for page in reader.pages:
                     text = page.extract_text()
                     if text:
@@ -50,9 +50,12 @@ def analyze_document(request):
             # Remove the temporary file
             os.remove(temporary_file_path)
 
+            if not document_text:
+                return JsonResponse({"error": "No se pudo extraer texto del documento."}, status=400)
+
             # Summarize the document using the updated OpenAI API method
             summary = summarize_with_openai(document_text)
-            return JsonResponse({"summary": summary})
+            return JsonResponse({"document_text": document_text, "summary": summary})
 
         except Exception as e:
             # Clean up temporary file in case of error

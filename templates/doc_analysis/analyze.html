@@ -1,104 +1,116 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Análisis de Documentos</title>
-</head>
-<body>
-    <h1>Subir Documento Legal (PDF, DOCX, TXT)</h1>
-    <form id="uploadForm" enctype="multipart/form-data">
-        <input type="file" id="document" name="document" accept=".pdf,.docx,.txt">
-        <button type="button" onclick="uploadDocument()">Subir y Analizar</button>
-    </form>
-    <h2>Resumen</h2>
-    <div id="summary"></div>
+{% extends "base.html" %}
 
-    <h2>Preguntar sobre el Documento</h2>
-    <input type="text" id="userQuestion" placeholder="Escriba su pregunta aquí">
-    <button type="button" onclick="askQuestion()">Hacer Pregunta</button>
-    <h2>Respuesta</h2>
-    <div id="answer"></div>
+{% block title %}Análisis de Documentos - LegalTeam{% endblock %}
 
-    <script>
-        let extractedDocumentText = '';  // Store the extracted document text
+{% block content %}
+<div class="analysis-container">
+    <!-- Left Section for Document Upload and View -->
+    <div class="left-section">
+        <h2 style="color: #304674">Subir Documento Legal (PDF, DOCX, TXT)</h2>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="document" name="document" accept=".pdf,.docx,.txt">
+            <button type="button" onclick="uploadDocument()" class="upload-button">Subir y Analizar</button>
+        </form>
+        <div id="uploadedDocument" class="document-container">
+            <h2 style="color: #304674">Documento Cargado</h2>
+            <div id="documentText" class="document-text" style="color: black;"></div>
+        </div>
+    </div>
 
-        function uploadDocument() {
-            const formData = new FormData();
-            const fileInput = document.getElementById('document').files[0];
+    <!-- Right Section for Summary and Q&A -->
+    <div class="right-section">
+        <!-- Summary Container -->
+        <div class="summary-container">
+            <h2 style="color: #304674">Resumen del Documento</h2>
+            <div id="summary" class="summary-text" style="color: black;"></div>
+        </div>
 
-            if (!fileInput) {
-                alert("Por favor seleccione un documento para subir.");
-                return;
-            }
+        <!-- Q&A Container -->
+        <div class="qa-container">
+            <h2 style="color: #304674">Preguntar sobre el Documento</h2>
+            <input type="text" id="userQuestion" placeholder="Escriba su pregunta aquí">
+            <button type="button" onclick="askQuestion()" class="qa-button">Hacer Pregunta</button>
+            <div id="answer" class="answer-text" style="color: black;"></div>
+        </div>
+    </div>
+</div>
 
-            formData.append('document', fileInput);
+<script>
+    let extractedDocumentText = '';  // Store the extracted document text
 
-            fetch('/DocAnalysis/analyze/', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error HTTP! Estado: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.error) {
-                    alert(data.error);
-                } else {
-                    document.getElementById('summary').innerText = data.summary;
-                    extractedDocumentText = data.summary;  // Store the extracted text for Q&A
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Ocurrió un error al procesar el documento. Por favor intente de nuevo.');
-            });
+    function uploadDocument() {
+        const formData = new FormData();
+        const fileInput = document.getElementById('document').files[0];
+
+        if (!fileInput) {
+            alert("Por favor seleccione un documento para subir.");
+            return;
         }
 
-        function askQuestion() {
-            const question = document.getElementById('userQuestion').value;
-        
-            if (!question) {
-                alert("Por favor escriba una pregunta.");
-                return;
+        formData.append('document', fileInput);
+
+        fetch('/DocAnalysis/analyze/', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error HTTP! Estado: ${response.status}`);
             }
-        
-            const requestData = {
-                document_text: extractedDocumentText,
-                question: question
-            };
-        
-            // Log the data being sent to confirm the payload
-            console.log("Data being sent for Q&A:", requestData);
-        
-            fetch('/DocAnalysis/ask/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestData)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error HTTP! Estado: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.error) {
-                    alert(data.error);
-                } else {
-                    document.getElementById('answer').innerText = data.answer;
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Ocurrió un error al obtener la respuesta. Por favor intente de nuevo.');
-            });
-        }        
-    </script>
-</body>
-</html>
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                document.getElementById('documentText').innerText = data.document_text;  // Mostrar el texto del documento cargado
+                document.getElementById('summary').innerText = data.summary;  // Mostrar el resumen
+                extractedDocumentText = data.document_text;  // Guardar el texto extraído para preguntas
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Ocurrió un error al procesar el documento. Por favor intente de nuevo.');
+        });
+    }
+
+    function askQuestion() {
+        const question = document.getElementById('userQuestion').value;
+
+        if (!question) {
+            alert("Por favor escriba una pregunta.");
+            return;
+        }
+
+        const requestData = {
+            document_text: extractedDocumentText,
+            question: question
+        };
+
+        fetch('/DocAnalysis/ask/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error HTTP! Estado: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                document.getElementById('answer').innerText = data.answer;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Ocurrió un error al obtener la respuesta. Por favor intente de nuevo.');
+        });
+    }
+</script>
+{% endblock %}
