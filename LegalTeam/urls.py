@@ -24,4 +24,5 @@ urlpatterns = [
     path('scraper/', include('scraper.urls')),
     path('analysis/', include('analysis.urls')),
     path('DocAnalysis/', include('DocAnalysis.urls')),
+    path('notifications/', include('notifications.urls')),
 ]

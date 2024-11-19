@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Suscripción Confirmada - LegalTeam{% endblock %}
+
+{% block header %}
+<h1 class="text-center my-8" style="color: #304674;">Suscripción Confirmada</h1>
+{% endblock %}
+
+{% block content %}
+<div class="confirmation-container" style="max-width: 40rem; margin: 0 auto; padding: 2rem; background-color: #ffffff; border-radius: 8px; box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);">
+    <p style="color: #304674; font-size: 1.1rem;">Gracias <strong>{{ email }}</strong> por suscribirse a actualizaciones para el caso <strong>{{ case_number }}</strong>.</p>
+    <p style="color: #304674;">Recibirá un correo electrónico de confirmación pronto.</p>
+</div>
+{% endblock %}

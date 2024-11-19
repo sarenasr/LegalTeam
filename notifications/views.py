@@ -17,13 +17,13 @@ def subscribe(request):
             # Send confirmation email
             send_mail(
                 'Confirmación de Suscripción',
-                f'Ha suscrito actualizaciones para el caso {case_number}.',
+                f'Usted a suscrito actualizaciones para el caso {case_number}. Legal Team le notificará por correo electrónico cuando haya actualizaciones.',
                 settings.DEFAULT_FROM_EMAIL,
                 [email],
                 fail_silently=False,
             )
 
-            return render(request, 'notifications/subscription_success.html', {'email': email, 'case_number': case_number})
+            return render(request, 'subscription_success.html', {'email': email, 'case_number': case_number})
     else:
         form = SubscriptionForm()
-    return render(request, 'notifications/subscribe.html', {'form': form})
+    return render(request, 'subscribe.html', {'form': form})
